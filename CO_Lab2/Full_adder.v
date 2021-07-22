@@ -1,6 +1,7 @@
 // Class: 109暑 計算機組織 蔡文錦
 // Author: 陳品劭 109550206
 // Date: 20210723
+//Coding by TA
 module Full_adder(sum, carryOut, carryIn, input1, input2);
 
 	input carryIn, input1, input2;

@@ -1,6 +1,7 @@
 // Class: 109暑 計算機組織 蔡文錦
 // Author: 陳品劭 109550206
 // Date: 20210723
+//Coding by TA
 `timescale 1ns / 1ps
 `include "ALU.v"
 `include "Shifter.v"
@@ -11,11 +12,11 @@
 `define answer_file_ALU "ans1_ALU.txt"
 `define answer_file_Shifter "ans1_Shifter.txt"
 `define numOfTest 4
-
+//Myself module
 `include "MUX_2to1.v" 
 `include "MUX_4to2.v" 
 `include "MUX_2to1_32bit.v" 
-
+//
 module TestBench();
 
 	reg clk;
