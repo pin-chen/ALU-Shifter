@@ -9,6 +9,8 @@
 `define answer_file_Shifter "ans1_Shifter.txt"
 `define numOfTest 4
 
+`include "MUX_2to1.v" 
+`include "MUX_4to2.v" 
 
 module TestBench();
 

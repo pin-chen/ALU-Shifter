@@ -13,20 +13,14 @@ module ALU_1bit( result, carryOut, a, b, invertA, invertB, operation, carryIn, l
   
   /*your code here*/ 
   wire A, B;
-  reg Result;
   MUX_2to1 M1(a, ~a, invertA, A);
-  MUX_2to1 M1(b, ~b, invertB, B);
+  MUX_2to1 M2(b, ~b, invertB, B);
   
-  wire add;
-  Full_adder M(add, carryOut, carryIn, A, B);
+  wire Or, And, Add;
+  or (Or, A, B);
+  and (And, A, B);
+  Full_adder M(Add, carryOut, carryIn, A, B);
   
-  always@(*)
-	case(operation)
-		2'b00 : Result = A | B;
-		2'b01 :	Result = A & B;
-		2'b10 :	Result = add;
-		2'b11 :	Result = less;
-	endcase
-	
-  assign result = Result;
+  MUX_4to2 M3({Or, And, Add, less}, operation, result );
+  //
 endmodule
