@@ -2,7 +2,8 @@
 // Author: 陳品劭 109550206
 // Date: 20210723
 module MUX_2to1_32bit(input [31:0] data0, data1, input select, output [31:0] data );
-	//Do same MUX_2to1 32 times
+	//Do same MUX_2to1 32 times 
+	//generate by C code
 	MUX_2to1 M0( data0[0], data1[0], select, data[0] );
 	MUX_2to1 M1( data0[1], data1[1], select, data[1] );
 	MUX_2to1 M2( data0[2], data1[2], select, data[2] );
