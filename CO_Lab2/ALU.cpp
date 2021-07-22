@@ -1,3 +1,6 @@
+// Class: 109暑 計算機組織 蔡文錦
+// Author: 陳品劭 109550206
+// Date: 20210723
 #include <iostream>
 #include <fstream>
 
@@ -8,10 +11,11 @@ int main(){
 	fstream fout;
 	
 	fout.open("ALU.txt", ios::out);
-	
+	//Generate 32 1-bit code instructions
 	for(int i = 0; i < 32; i++){
 		fout << "ALU_1bit ALU"<<i<<"( result["<<i<<"], carry["<<i+1<<"], aluSrc1["<<i<<"], aluSrc2["<<i<<"], invertA, invertB, operation, carry["<<i<<"], 1'b0 );\n";
 	}
+	//Generate nor with zero
 	for(int i = 0; i < 32; i++){
 		fout << ", result["<<i<<"]";
 	}
