@@ -11,6 +11,7 @@
 
 `include "MUX_2to1.v" 
 `include "MUX_4to2.v" 
+`include "MUX_2to1_32bit.v" 
 
 module TestBench();
 
