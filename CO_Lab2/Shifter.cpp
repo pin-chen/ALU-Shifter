@@ -11,7 +11,7 @@ int main(){
 	fstream fout;
 	
 	fout.open("Shifter.txt", ios::out);
-	
+	//Generate
 	for(int i = 0; i < 32; i++){
 		fout << "	MUX_2to1 M"<<i<<"( data0["<<i<<"], data1["<<i<<"], select, data["<<i<<"] );\n";
 	}

@@ -11,7 +11,7 @@ int main(){
 	fstream fout;
 	
 	fout.open("ALU.txt", ios::out);
-	
+	//Generate
 	for(int i = 0; i < 32; i++){
 		fout << "ALU_1bit ALU"<<i<<"( result["<<i<<"], carry["<<i+1<<"], aluSrc1["<<i<<"], aluSrc2["<<i<<"], invertA, invertB, operation, carry["<<i<<"], 1'b0 );\n";
 	}
