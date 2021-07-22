@@ -12,19 +12,10 @@ module ALU_1bit( result, carryOut, a, b, invertA, invertB, operation, carryIn, l
   input wire less;
   
   /*your code here*/ 
-  reg A, B;
+  wire A, B;
   reg Result;
-  always@(*)
-	case(invertA)
-		1'b0 : A = a;
-		1'b1 : A = ~a;
-	endcase
-  
-  always@(*)
-	case(invertB)
-		1'b0 : B = b;
-		1'b1 : B = ~b;
-	endcase
+  MUX_2to1 M1(a, ~a, invertA, A);
+  MUX_2to1 M1(b, ~b, invertB, B);
   
   wire add;
   Full_adder M(add, carryOut, carryIn, A, B);
