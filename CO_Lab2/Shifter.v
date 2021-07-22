@@ -10,8 +10,8 @@ module Shifter( result, leftRight, shamt, sftSrc  );
   reg [31:0] Result;
   always@(*)
   case(leftRight)
-	0 : Result = sftSrc >> shamt;
-	1 : Result = sftSrc << shamt;
+	1'b0 : Result = sftSrc >> shamt;
+	1'b1 : Result = sftSrc << shamt;
   endcase
   assign result = Result;
   
