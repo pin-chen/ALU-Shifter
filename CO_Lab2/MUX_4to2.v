@@ -1,3 +1,6 @@
+// Class: 109暑 計算機組織 蔡文錦
+// Author: 陳品劭 109550206
+// Date: 20210723
 module MUX_4to2(input [0:3] Data, input [1:0] select, output data );
 
 	wire X, Y;
