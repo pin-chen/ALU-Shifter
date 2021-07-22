@@ -17,9 +17,9 @@ module ALU( result, zero, overflow, aluSrc1, aluSrc2, invertA, invertB, operatio
 
 	wire [32:1] carry; 
 	wire set;
-	//
+	//ALU0 carryIn is invertB and Get set from ALU31
 	ALU_1bit ALU0( result[0], carry[1], aluSrc1[0], aluSrc2[0], invertA, invertB, operation, invertB, set );
-	//
+	//ALU1~AlU30 generate by C code
 	ALU_1bit ALU1( result[1], carry[2], aluSrc1[1], aluSrc2[1], invertA, invertB, operation, carry[1], 1'b0 );
 	ALU_1bit ALU2( result[2], carry[3], aluSrc1[2], aluSrc2[2], invertA, invertB, operation, carry[2], 1'b0 );
 	ALU_1bit ALU3( result[3], carry[4], aluSrc1[3], aluSrc2[3], invertA, invertB, operation, carry[3], 1'b0 );
@@ -50,7 +50,7 @@ module ALU( result, zero, overflow, aluSrc1, aluSrc2, invertA, invertB, operatio
 	ALU_1bit ALU28( result[28], carry[29], aluSrc1[28], aluSrc2[28], invertA, invertB, operation, carry[28], 1'b0 );
 	ALU_1bit ALU29( result[29], carry[30], aluSrc1[29], aluSrc2[29], invertA, invertB, operation, carry[29], 1'b0 );
 	ALU_1bit ALU30( result[30], carry[31], aluSrc1[30], aluSrc2[30], invertA, invertB, operation, carry[30], 1'b0 );
-	//ALU31
+	//ALU31 
 	reg A, B;
 	reg Result;
 	always@(*)
@@ -64,7 +64,7 @@ module ALU( result, zero, overflow, aluSrc1, aluSrc2, invertA, invertB, operatio
 		1'b0 : B = aluSrc2[31];
 		1'b1 : B = ~aluSrc2[31];
 	endcase
-	
+	//ALU31 get set from adder
 	Full_adder M(set, carry[32], carry[31], A, B);
 	
 	always@(*)
@@ -74,10 +74,10 @@ module ALU( result, zero, overflow, aluSrc1, aluSrc2, invertA, invertB, operatio
 		2'b10 :	Result = set;
 		2'b11 :	Result = 1'b0;
 	endcase
-	
 	assign result[31] = Result;
+	//Get overflow
 	assign overflow = carry[31] ^ carry[32];
-	//
+	//Get zero
 	nor (zero, result[0], result[1], result[2], result[3], result[4], result[5], result[6], result[7], 
 			   result[8], result[9], result[10], result[11], result[12], result[13], result[14], result[15], 
 			   result[16], result[17], result[18], result[19], result[20], result[21], result[22], result[23], 
