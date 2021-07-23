@@ -12,12 +12,40 @@ int main(){
 	string s = "ALU_1bit ALU1( result[1], carry[2], aluSrc1[1], aluSrc2[1], invertA, invertB, operation, carry[1], 0 );";
 	fstream fout;
 	fstream AnsOut;
+	
+	fstream Sout;
+	fstream AnsShift;
+	
 	fout.open("test1_ALU.txt", ios::out);
 	AnsOut.open("ans1_ALU.txt", ios::out);
+	
+	Sout.open("test1_Shifter.txt", ios::out);
+	AnsShift.open("ans1_Shifter.txt", ios::out);
+	
 	string OP[] = {"0010","0110","0001","0000","1100","1101","0111"};
 	
-	srand(time(NULL));
 	int T = 1;
+	
+	srand(time(NULL));
+	for(int j= 0 ; j < 4;j ++){
+		int sht, shamt;
+		for(int i = 0; i < 32; i++){
+			int x = rand()%(2) - 0;
+			if(x) sht += T << i; 
+		}
+		for(int i = 0; i < 5; i++){
+			int x = rand()%(2) - 0;
+			if(x) sht += T << i; 
+		}
+		int leftRight = rand()%(2) - 0;
+		Sout << leftRight << bitset<5>(shamt) << bitset<32>(sht) << endl;
+		int result;
+		if(leftRight) result = sht >> shamt;
+		else result = sht << shamt;
+		AnsShift << bitset<32>(result) << '\n'; 
+	}
+	
+	srand(time(NULL));
 	for(int j= 0 ; j < 4;j ++){
 		
 		int z = rand()%(7) - 0;
@@ -58,7 +86,8 @@ int main(){
 		else zero = 0;
 		AnsOut << overflow << zero << bitset<32>(result)<<'\n';
 	}
-	
+	AnsShift.close();
+	Sout.close();
 	AnsOut.close();
 	fout.close();
 	return 0;
