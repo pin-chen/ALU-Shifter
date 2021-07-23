@@ -80,6 +80,9 @@ module TestBench();
 	  end
 		  
 	  else begin
+		$display("overflow #%1b \n", overflow);	
+		$display("zero #%1b \n", zero);	
+		$display("data #%32b \n", result_ALU);	
 	    $display("ALU test data #%0d is wrong\n", i);		  
 	  end
 	  	  

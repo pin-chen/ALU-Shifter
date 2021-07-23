@@ -21,34 +21,21 @@ module ALU( result, zero, overflow, aluSrc1, aluSrc2, invertA, invertB, operatio
 	//ALU1~AlU30 generate
 	genvar i;
 	generate
-		for(i = 1; i < 31; i = i + 1)
+		for(i = 1; i < 32; i = i + 1)
 			ALU_1bit ALU_bit( result[i], carry[i + 1], aluSrc1[i], aluSrc2[i], invertA, invertB, operation, carry[i], 1'b0 );
 	endgenerate
-	//ALU31 
-	reg A, B;
-	reg Result;
+	//Get set
+	reg SET;
 	always@(*)
-	case(invertA)
-		1'b0 : A = aluSrc1[31];
-		1'b1 : A = ~aluSrc1[31];
-	endcase
-	always@(*)
-	case(invertB)
-		1'b0 : B = aluSrc2[31];
-		1'b1 : B = ~aluSrc2[31];
-	endcase
-	//ALU31 get set from adder
-	Full_adder M(set, carry[32], carry[31], A, B);
-	always@(*)
-	case(operation)
-		2'b00 : Result = A | B;
-		2'b01 :	Result = A & B;
-		2'b10 :	Result = set;
-		2'b11 :	Result = 1'b0;
-	endcase
-	assign result[31] = Result;
+		case({aluSrc1[31], aluSrc2[31]})
+			2'b00 : SET = aluSrc1 < aluSrc2 ? 1'b1 : 1'b0;
+			2'b01 : SET = 1'b0;
+			2'b10 : SET = 1'b1;
+			2'b11 : SET = aluSrc1 < aluSrc2 ? 1'b1 : 1'b0;
+		endcase
+	assign set = SET;
 	//Get overflow
-	assign overflow = carry[31] ^ carry[32];
+	assign overflow = (carry[31] ^ carry[32]) & operation[1] & ~operation[0];
 	//Get zero
 	reg Zero;
 	always@(*)
