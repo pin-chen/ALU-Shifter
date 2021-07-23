@@ -79,10 +79,15 @@ module TestBench();
 	  i = i + 1;
 	  #1
 	  if (ans_ALU[33] == overflow && ans_ALU[32] == zero && ans_ALU[31:0] == result_ALU) begin
+		
+		
 		score = score + 1;
 	  end
 		  
 	  else begin
+		$display("overflow #%1b\n", overflow);
+		$display("zero #%1b\n", zero);
+		$display("data #%32b\n", result_ALU);
 	    $display("ALU test data #%0d is wrong\n", i);		  
 	  end
 	  	  

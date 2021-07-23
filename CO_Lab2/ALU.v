@@ -60,13 +60,16 @@ module ALU( result, zero, overflow, aluSrc1, aluSrc2, invertA, invertB, operatio
 	and (And, A, B);
 	Full_adder M(set, carry[32], carry[31], A, B);//get set by adder result
 
-	MUX_4to2 M3({Or, And, set, less}, operation, result[31] );
+	MUX_4to2 M3({Or, And, set, 1'b0}, operation, result[31] );
 	//Know overflow from the higher two carry
-	xor (overflow, carry[32], carry[31]);
+	wire Over;
+	xor (Over, carry[32], carry[31]);
+	MUX_4to2 M4({1'b0, 1'b0, Over, 1'b0}, operation, overflow);
 	//Get zero
-	nor (zero, result[0], result[1], result[2], result[3], result[4], result[5], result[6], result[7], 
-			   result[8], result[9], result[10], result[11], result[12], result[13], result[14], result[15], 
-			   result[16], result[17], result[18], result[19], result[20], result[21], result[22], result[23], 
-			   result[24], result[25], result[26], result[27], result[28], result[29], result[30], result[31]);
+	reg Zero;
+	always@(*)
+		if(result == 32'b0) Zero = 1'b1;
+		else Zero = 1'b0;
+	assign zero = Zero;
 	//
 endmodule
