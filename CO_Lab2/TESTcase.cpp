@@ -6,6 +6,7 @@
 #include <time.h>
 #include <bitset>
 #include <string> 
+#define num_of_test  100
 using namespace std;
 
 int main(){
@@ -27,7 +28,7 @@ int main(){
 	int T = 1;
 	
 	srand(time(NULL));
-	for(int j= 0 ; j < 4;j ++){
+	for(int j= 0 ; j < num_of_test;j ++){
 		unsigned int sht = 0, shamt = 0;
 		for(int i = 0; i < 32; i++){
 			int x = rand()%(2) - 0;
@@ -45,7 +46,7 @@ int main(){
 		AnsShift << bitset<32>(result) << '\n'; 
 	}
 	
-	for(int j= 0 ; j < 4;j ++){
+	for(int j= 0 ; j < num_of_test;j ++){
 		
 		int z = rand()%(7) - 0;
 		fout << OP[z];

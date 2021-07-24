@@ -11,7 +11,7 @@
 `define test_file_Shifter "test1_Shifter.txt"
 `define answer_file_ALU "ans1_ALU.txt"
 `define answer_file_Shifter "ans1_Shifter.txt"
-`define numOfTest 4
+`define numOfTest 100
 //Myself module
 `include "MUX_2to1.v" 
 `include "MUX_4to2.v" 
@@ -94,10 +94,17 @@ module TestBench();
 	  #1
 	  if (ans_Shifter[31:0] == result_Shifter) begin
 	    score = score + 1;
+		/*
+		if(sftSrc[31] == 1'b1 && leftRight == 0)begin
+			$display("Ans #%32b \n", ans_Shifter[31:0]);	
+			$display("data #%32b \n", result_Shifter);	
+		end
+		*/
 	  end
 		  
 	  else begin
-		$display("data #%32b\n", result_Shifter);
+		$display("Ans #%32b \n", ans_Shifter[31:0]);	
+		$display("data #%32b \n", result_Shifter);	
 	    $display("Shifter test data #%0d is wrong\n", i );		  
 	  end
 		  	  	  

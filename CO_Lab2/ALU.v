@@ -58,9 +58,10 @@ module ALU( result, zero, overflow, aluSrc1, aluSrc2, invertA, invertB, operatio
 	wire Or, And;
 	or (Or, A, B);
 	and (And, A, B);
-	Full_adder M(set, carry[32], carry[31], A, B);//get set by adder result
-
-	MUX_4to2 M3({Or, And, set, 1'b0}, operation, result[31] );
+	wire add;
+	Full_adder M(add, carry[32], carry[31], A, B);//get set by adder result
+	MUX_4to2 M5({add, 1'b0, 1'b1, add}, {aluSrc1[31],aluSrc2[31]}, set );
+	MUX_4to2 M3({Or, And, add, 1'b0}, operation, result[31] );
 	//Know overflow from the higher two carry
 	wire Over;
 	xor (Over, carry[32], carry[31]);
