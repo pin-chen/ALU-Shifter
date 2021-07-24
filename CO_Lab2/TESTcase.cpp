@@ -6,7 +6,7 @@
 #include <time.h>
 #include <bitset>
 #include <string> 
-#define num_of_test  100
+#define num_of_test 400
 using namespace std;
 
 int main(){
