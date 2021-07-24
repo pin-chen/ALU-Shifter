@@ -6,7 +6,7 @@
 #include <time.h>
 #include <bitset>
 #include <string> 
-#define num_of_test  4
+#define num_of_test 400
 using namespace std;
 
 int main(){
@@ -48,8 +48,7 @@ int main(){
 	
 	for(int j= 0 ; j < num_of_test;j ++){
 		
-		//int z = rand()%(7) - 0;
-		int z =1 ;
+		int z = rand()%(7) - 0;
 		fout << OP[z];
 		
 		int src1 = 0;

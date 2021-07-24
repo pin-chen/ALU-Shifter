@@ -98,10 +98,6 @@ module TestBench();
 	  #1
 	  if (ans_Shifter[31:0] == result_Shifter) begin
 	    score = score + 1;
-		//if(sftSrc[31] == 1'b1 && leftRight == 0)begin
-		//	$display("Ans #%32b \n", ans_Shifter[31:0]);	
-		//	$display("data #%32b \n", result_Shifter);	
-		//end
 	  end
 		  
 	  else begin

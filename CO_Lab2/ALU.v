@@ -18,7 +18,7 @@ module ALU( result, zero, overflow, aluSrc1, aluSrc2, invertA, invertB, operatio
 	wire [32:1] carry; 
 	//ALU0 carryIn is invertB and Get set from ALU31
 	ALU_1bit ALU0( result[0], carry[1], aluSrc1[0], aluSrc2[0], invertA, invertB, operation, invertB, set );
-	//ALU1~AlU30 generate
+	//ALU1~AlU31 generate
 	genvar i;
 	generate
 		for(i = 1; i < 32; i = i + 1)
