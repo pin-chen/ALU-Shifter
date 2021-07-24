@@ -11,11 +11,6 @@
 `define answer_file_ALU "ans1_ALU.txt"
 `define answer_file_Shifter "ans1_Shifter.txt"
 `define numOfTest 400
-//Myself module
-`include "MUX_2to1.v" 
-`include "MUX_4to2.v" 
-`include "MUX_2to1_32bit.v" 
-//
 
 module TestBench();
 	integer f;
