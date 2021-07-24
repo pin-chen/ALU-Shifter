@@ -97,6 +97,7 @@ module TestBench();
 	  end
 		  
 	  else begin
+		$display("data #%32b\n", result_Shifter);
 	    $display("Shifter test data #%0d is wrong\n", i );		  
 	  end
 		  	  	  
