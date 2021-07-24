@@ -28,24 +28,23 @@ int main(){
 	
 	srand(time(NULL));
 	for(int j= 0 ; j < 4;j ++){
-		int sht, shamt;
+		unsigned int sht = 0, shamt = 0;
 		for(int i = 0; i < 32; i++){
 			int x = rand()%(2) - 0;
 			if(x) sht += T << i; 
 		}
 		for(int i = 0; i < 5; i++){
 			int x = rand()%(2) - 0;
-			if(x) sht += T << i; 
+			if(x) shamt += T << i; 
 		}
 		int leftRight = rand()%(2) - 0;
 		Sout << leftRight << bitset<5>(shamt) << bitset<32>(sht) << endl;
 		int result;
-		if(leftRight) result = sht >> shamt;
+		if(leftRight==0) result = sht >> shamt;
 		else result = sht << shamt;
 		AnsShift << bitset<32>(result) << '\n'; 
 	}
 	
-	srand(time(NULL));
 	for(int j= 0 ; j < 4;j ++){
 		
 		int z = rand()%(7) - 0;
