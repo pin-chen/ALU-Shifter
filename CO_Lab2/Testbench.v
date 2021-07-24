@@ -1,7 +1,6 @@
 // Class: 109暑 計算機組織 蔡文錦
 // Author: 陳品劭 109550206
 // Date: 20210723
-//Coding by TA
 `timescale 1ns / 1ps
 `include "ALU.v"
 `include "Shifter.v"
@@ -11,14 +10,18 @@
 `define test_file_Shifter "test1_Shifter.txt"
 `define answer_file_ALU "ans1_ALU.txt"
 `define answer_file_Shifter "ans1_Shifter.txt"
-`define numOfTest 100
+`define numOfTest 400
 //Myself module
 `include "MUX_2to1.v" 
 `include "MUX_4to2.v" 
 `include "MUX_2to1_32bit.v" 
 //
-module TestBench();
 
+module TestBench();
+	integer f;
+	initial
+		f = $fopen("error.txt","w");
+	
 	reg clk;
 	integer i, score;
 		
@@ -79,32 +82,35 @@ module TestBench();
 	  i = i + 1;
 	  #1
 	  if (ans_ALU[33] == overflow && ans_ALU[32] == zero && ans_ALU[31:0] == result_ALU) begin
-		
-		
 		score = score + 1;
 	  end
 		  
 	  else begin
-		$display("overflow #%1b\n", overflow);
-		$display("zero #%1b\n", zero);
-		$display("data #%32b\n", result_ALU);
+		$fwrite(f,"Error case ALU:\n");
+		$fwrite(f,"\t TESTCASE: %68b \n", inp_ALU);	
+		$fwrite(f,"Your answer: \n");
+		$fwrite(f,"\t overflow: %1b \n", overflow);	
+		$fwrite(f,"\t zero: %1b \n", zero);	
+		$fwrite(f,"\t result: %32b \n", result_ALU);	
+		$fwrite(f,"Answer: \n");
+		$fwrite(f,"\t overflow: %1b \n", ans_ALU[33]);	
+		$fwrite(f,"\t zero: %1b \n", ans_ALU[32]);	
+		$fwrite(f,"\t result: %32b \n", ans_ALU[31:0]);	
 	    $display("ALU test data #%0d is wrong\n", i);		  
 	  end
 	  	  
 	  #1
 	  if (ans_Shifter[31:0] == result_Shifter) begin
 	    score = score + 1;
-		/*
-		if(sftSrc[31] == 1'b1 && leftRight == 0)begin
-			$display("Ans #%32b \n", ans_Shifter[31:0]);	
-			$display("data #%32b \n", result_Shifter);	
-		end
-		*/
 	  end
 		  
 	  else begin
-		$display("Ans #%32b \n", ans_Shifter[31:0]);	
-		$display("data #%32b \n", result_Shifter);	
+		$fwrite(f,"Error case shifter:\n");
+		$fwrite(f,"\t TESTCASE: %34b \n", inp_Shifter);	
+		$fwrite(f,"Your answer:\n");
+		$fwrite(f,"\t sftSrc: %32b \n", result_Shifter);	
+		$fwrite(f,"Answer:\n");
+		$fwrite(f,"\t sftSrc: %32b \n", ans_Shifter[31:0]);	
 	    $display("Shifter test data #%0d is wrong\n", i );		  
 	  end
 		  	  	  

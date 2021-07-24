@@ -50,22 +50,21 @@ module ALU( result, zero, overflow, aluSrc1, aluSrc2, invertA, invertB, operatio
 	ALU_1bit ALU28( result[28], carry[29], aluSrc1[28], aluSrc2[28], invertA, invertB, operation, carry[28], 1'b0 );
 	ALU_1bit ALU29( result[29], carry[30], aluSrc1[29], aluSrc2[29], invertA, invertB, operation, carry[29], 1'b0 );
 	ALU_1bit ALU30( result[30], carry[31], aluSrc1[30], aluSrc2[30], invertA, invertB, operation, carry[30], 1'b0 );
-	//ALU31
+	//ALU31 invert
 	wire A, B;
 	MUX_2to1 M1(aluSrc1[31], ~aluSrc1[31], invertA, A);
 	MUX_2to1 M2(aluSrc2[31], ~aluSrc2[31], invertB, B);
-
-	wire Or, And;
+	//ALU31 get set and result
+	wire Or, And, add;
 	or (Or, A, B);
 	and (And, A, B);
-	wire add;
-	Full_adder M(add, carry[32], carry[31], A, B);//get set by adder result
-	MUX_4to2 M5({add, 1'b0, 1'b1, add}, {aluSrc1[31],aluSrc2[31]}, set );
-	MUX_4to2 M3({Or, And, add, 1'b0}, operation, result[31] );
+	Full_adder FA(add, carry[32], carry[31], A, B);//get set by adder result
+	MUX_4to2 M3({add, 1'b0, 1'b1, add}, {aluSrc1[31],aluSrc2[31]}, set );
+	MUX_4to2 M4({Or, And, add, 1'b0}, operation, result[31] );
 	//Know overflow from the higher two carry
 	wire Over;
 	xor (Over, carry[32], carry[31]);
-	MUX_4to2 M4({1'b0, 1'b0, Over, 1'b0}, operation, overflow);
+	MUX_4to2 M5({1'b0, 1'b0, Over, 1'b0}, operation, overflow);
 	//Get zero
 	nor (zero, result[0], result[1], result[2], result[3], result[4], result[5], result[6], result[7], result[8], result[9], result[10], result[11], result[12], result[13], result[14], result[15], result[16], result[17], result[18], result[19], result[20], result[21], result[22], result[23], result[24], result[25], result[26], result[27], result[28], result[29], result[30], result[31]);
 	//
