@@ -9,15 +9,16 @@
 using namespace std;
 
 int main(){
+	string s = "ALU_1bit ALU1( result[1], carry[2], aluSrc1[1], aluSrc2[1], invertA, invertB, operation, carry[1], 0 );";
+	fstream fout;
+	fstream AnsOut;
 	
 	fstream Sout;
 	fstream AnsShift;
-	#if 0
-	fstream fout;
-	fstream AnsOut;
+	
 	fout.open("test1_ALU.txt", ios::out);
 	AnsOut.open("ans1_ALU.txt", ios::out);
-	#endif
+	
 	Sout.open("test1_Shifter.txt", ios::out);
 	AnsShift.open("ans1_Shifter.txt", ios::out);
 	
@@ -27,7 +28,7 @@ int main(){
 	
 	srand(time(NULL));
 	for(int j= 0 ; j < 4;j ++){
-		int sht, shamt;
+		unsigned int sht = 0, shamt = 0;
 		for(int i = 0; i < 32; i++){
 			int x = rand()%(2) - 0;
 			if(x) sht += T << i; 
@@ -35,7 +36,6 @@ int main(){
 		for(int i = 0; i < 5; i++){
 			int x = rand()%(2) - 0;
 			if(x) shamt += T << i; 
-			//cout << shamt <<'\n';
 		}
 		int leftRight = rand()%(2) - 0;
 		Sout << leftRight << bitset<5>(shamt) << bitset<32>(sht) << endl;
@@ -44,8 +44,7 @@ int main(){
 		else result = sht << shamt;
 		AnsShift << bitset<32>(result) << '\n'; 
 	}
-	#if 0
-	srand(time(NULL));
+	
 	for(int j= 0 ; j < 4;j ++){
 		
 		int z = rand()%(7) - 0;
@@ -86,11 +85,9 @@ int main(){
 		else zero = 0;
 		AnsOut << overflow << zero << bitset<32>(result)<<'\n';
 	}
-	AnsOut.close();
-	fout.close();
-	#endif
 	AnsShift.close();
 	Sout.close();
-	
+	AnsOut.close();
+	fout.close();
 	return 0;
 } 
