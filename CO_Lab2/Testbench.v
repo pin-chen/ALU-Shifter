@@ -83,6 +83,7 @@ module TestBench();
 		  
 	  else begin
 		$fwrite(f,"Error case ALU:\n");
+		$fwrite(f,"\t TESTCASE: %68b \n", inp_ALU);	
 		$fwrite(f,"Your answer: \n");
 		$fwrite(f,"\t overflow: %1b \n", overflow);	
 		$fwrite(f,"\t zero: %1b \n", zero);	
@@ -105,6 +106,7 @@ module TestBench();
 		  
 	  else begin
 		$fwrite(f,"Error case shifter:\n");
+		$fwrite(f,"\t TESTCASE: %34b \n", inp_Shifter);	
 		$fwrite(f,"Your answer:\n");
 		$fwrite(f,"\t sftSrc: %32b \n", result_Shifter);	
 		$fwrite(f,"Answer:\n");
