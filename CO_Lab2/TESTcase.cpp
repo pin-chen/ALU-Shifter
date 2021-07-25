@@ -90,7 +90,7 @@ int main(){
 	Sout.close();
 	AnsOut.close();
 	fout.close();
-	//system("iverilog -o Lab2 Testbench.v");
+	system("iverilog -o Lab2 Testbench.v");
 	system("vvp Lab2");
 	system("PAUSE");
 	return 0;

@@ -10,16 +10,8 @@
 `define test_file_Shifter "test1_Shifter.txt"
 `define answer_file_ALU "ans1_ALU.txt"
 `define answer_file_Shifter "ans1_Shifter.txt"
-<<<<<<< Updated upstream
-`define numOfTest 400
-=======
 `define numOfTest 1e6
-//Myself module
-`include "MUX_2to1.v" 
-`include "MUX_4to2.v" 
-`include "MUX_2to1_32bit.v" 
-//
->>>>>>> Stashed changes
+
 
 module TestBench();
 	integer f;
