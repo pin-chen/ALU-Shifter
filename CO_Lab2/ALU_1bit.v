@@ -31,7 +31,7 @@ module ALU_1bit( result, carryOut, a, b, invertA, invertB, operation, carryIn, l
 	endcase
   //Doing adder
   wire add;
-  Full_adder M(add, carryOut, carryIn, A, B);
+  Full_adder FA(add, carryOut, carryIn, A, B);
   //select the result of 4 type data bt operation
   always@(*)
 	case(operation)

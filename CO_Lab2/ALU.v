@@ -25,22 +25,30 @@ module ALU( result, zero, overflow, aluSrc1, aluSrc2, invertA, invertB, operatio
 			ALU_1bit ALU_bit( result[i], carry[i + 1], aluSrc1[i], aluSrc2[i], invertA, invertB, operation, carry[i], 1'b0 );
 	endgenerate
 	//Get set
-	reg SET;
+	reg Set;
 	always@(*)
 		case({aluSrc1[31], aluSrc2[31]})
-			2'b00 : SET = aluSrc1 < aluSrc2 ? 1'b1 : 1'b0;
-			2'b01 : SET = 1'b0;
-			2'b10 : SET = 1'b1;
-			2'b11 : SET = aluSrc1 < aluSrc2 ? 1'b1 : 1'b0;
+			2'b00 : Set = aluSrc1 < aluSrc2 ? 1'b1 : 1'b0;
+			2'b01 : Set = 1'b0;
+			2'b10 : Set = 1'b1;
+			2'b11 : Set = aluSrc1 < aluSrc2 ? 1'b1 : 1'b0;
 		endcase
-	assign set = SET;
+	assign set = Set;
 	//Get overflow
-	assign overflow = (carry[31] ^ carry[32]) & operation[1] & ~operation[0];
+	reg Over;
+	always@(*)
+		case(operation)
+			2'b00 : Over = 1'b0;
+			2'b01 : Over = 1'b0;
+			2'b10 : Over = carry[31] ^ carry[32];
+			2'b11 : Over = carry[31] ^ carry[32];
+		endcase
+	assign overflow = Over;
 	//Get zero
 	reg Zero;
 	always@(*)
 		if(result == 32'b0) Zero = 1'b1;
-		else Zero = 1'b0;
+		else 				Zero = 1'b0;
 	assign zero = Zero;
 	//
 endmodule

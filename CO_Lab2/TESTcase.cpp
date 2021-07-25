@@ -1,5 +1,5 @@
-// Class: 109´» ­pºâ¾÷²ÕÂ´ ½²¤åÀA
-// Author: ³¯«~Êo 109550206
+// Class: 109æš‘ è¨ˆç®—æ©Ÿçµ„ç¹” è”¡æ–‡éŒ¦
+// Author: é™³å“åŠ­ 109550206
 // Date: 20210723
 #include <iostream>
 #include <fstream>
@@ -79,6 +79,9 @@ int main(){
 		}else if(z==5){
 			result = ~(src1 | src2);
 		}else{
+			result = src1 - src2;
+			if(src1 > 0 && src2 < 0 && result < 0) overflow = 1;
+			else if(src1 < 0 && src2 > 0 && result > 0) overflow = 1;
 			result = (src1 < src2) ? 1 : 0;
 		}
 		int zero;
@@ -90,5 +93,8 @@ int main(){
 	Sout.close();
 	AnsOut.close();
 	fout.close();
+	system("iverilog -o Lab2 Testbench.v");
+	system("vvp Lab2");
+	system("PAUSE");
 	return 0;
 } 
