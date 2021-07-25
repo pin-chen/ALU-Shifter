@@ -1,6 +1,7 @@
 // Class: 109暑 計算機組織 蔡文錦
 // Author: 陳品劭 109550206
 // Date: 20210723
+
 module Shifter( result, leftRight, shamt, sftSrc  );
     
   output wire[31:0] result;

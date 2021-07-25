@@ -1,6 +1,8 @@
 // Class: 109暑 計算機組織 蔡文錦
 // Author: 陳品劭 109550206
 // Date: 20210723
+
+
 module ALU_1bit( result, carryOut, a, b, invertA, invertB, operation, carryIn, less ); 
   
   output wire result;
@@ -23,7 +25,7 @@ module ALU_1bit( result, carryOut, a, b, invertA, invertB, operation, carryIn, l
   wire Or, And, Add;
   or (Or, A, B);
   and (And, A, B);
-  Full_adder M(Add, carryOut, carryIn, A, B);
+  Full_adder FA(Add, carryOut, carryIn, A, B);
   //select result by operation with MUX_4to2
   MUX_4to2 M3({Or, And, Add, less}, operation, result );
   //

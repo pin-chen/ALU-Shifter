@@ -1,2 +1,3 @@
+iverilog -o Lab2 Testbench.v
 TESTcase.exe
 vvp Lab2

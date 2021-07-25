@@ -6,7 +6,7 @@
 #include <time.h>
 #include <bitset>
 #include <string> 
-#define num_of_test 400
+#define num_of_test 1e6
 using namespace std;
 
 int main(){
@@ -90,5 +90,8 @@ int main(){
 	Sout.close();
 	AnsOut.close();
 	fout.close();
+	//system("iverilog -o Lab2 Testbench.v");
+	system("vvp Lab2");
+	system("PAUSE");
 	return 0;
 } 
