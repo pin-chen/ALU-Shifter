@@ -33,6 +33,6 @@ module ALU31( result, carryOut, a, b, invertA, invertB, operation, carryIn, less
   //Know overflow from the higher two carry
   wire Over;
   xor (Over, carryIn, carryOut);
-  MUX_4to2 M5({1'b0, 1'b0, Over, 1'b0}, operation, overflow);
+  MUX_4to2 M5({1'b0, 1'b0, Over, Over}, operation, overflow);
   //
 endmodule

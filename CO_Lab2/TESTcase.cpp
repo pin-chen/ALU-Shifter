@@ -6,7 +6,7 @@
 #include <time.h>
 #include <bitset>
 #include <string> 
-#define num_of_test 1e6
+#define num_of_test 400
 using namespace std;
 
 int main(){
@@ -79,6 +79,9 @@ int main(){
 		}else if(z==5){
 			result = ~(src1 | src2);
 		}else{
+			result = src1 - src2;
+			if(src1 > 0 && src2 < 0 && result < 0) overflow = 1;
+			else if(src1 < 0 && src2 > 0 && result > 0) overflow = 1;
 			result = (src1 < src2) ? 1 : 0;
 		}
 		int zero;
